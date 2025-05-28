@@ -1,0 +1,13 @@
+.venv
+*.pth
+*.parquet
+*.csv
+*.json
+*.jsonl
+*.jsonl.gz
+test_eegs/*
+test_spectrograms/*
+train_eegs/*
+train_spectrograms/*
+log/*
+example_figures/*
