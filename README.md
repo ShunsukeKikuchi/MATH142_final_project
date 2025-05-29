@@ -24,7 +24,7 @@ qsub submit2.sh
 # Model3:
 qsub submit3.sh
 ```
-
+or, 
 ```bash: usual env
 # after activating environment
 nohup python train.py >log/train.log &
