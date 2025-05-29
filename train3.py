@@ -17,19 +17,19 @@ from tqdm import tqdm
 from pathlib import Path
 from typing import Dict, List, Sequence, Tuple, Union
 
-from model2 import EEGNet
+from model3 import resnext
 from data import EEGDataset, create_dfs
 
 class CFG:
     # basic
-    model_name = "resnet_gru"
+    model_name = "eegnet_v2"
     seed = 42
     fold = 0
 
     # training setting
     n_epoch = 60*60
     device = "cuda" if torch.cuda.is_available() else "cpu"
-    batch_size=128
+    batch_size=32
     lr = 1e-3
     autocast=True # used for training, not for validation
 
@@ -53,7 +53,7 @@ def main():
     valid_dataset = EEGDataset(valid_labels, train=False)
     valid_loader = DataLoader(valid_dataset, batch_size=config.batch_size, shuffle=False, num_workers=16)
 
-    model = EEGNet()
+    model = resnext(num_classes=6, in_channels=19, width_mult = 1.0)
     model.to("cuda")
     print("number of parameters: ", sum(p.numel() for p in model.parameters()))
     model = torch.compile(model)
@@ -67,7 +67,7 @@ def main():
         avg_val_loss = valid(model, valid_loader, kl_loss, epoch)
         if avg_val_loss < best_loss:
             best_loss = avg_val_loss
-            torch.save(model.state_dict(), "best_model2.pth")
+            torch.save(model.state_dict(), "best_model3.pth")
             print(f">>> New best model saved (KL={best_loss:.4f}) <<<")
 
 def train(model, train_loader, optimizer, criterion, epoch):
