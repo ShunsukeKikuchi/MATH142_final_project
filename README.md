@@ -4,18 +4,28 @@ Assuming hoffman2 environment.
 
 ## Environment
 ```bash:
+mkdir data log weights
 # if conda
 conda create math156
 conda activate math156
 conda install 'torch<2.7.0' numpy scipy matplotlib polars pandas
+pip install kaggle
 # if uv
 uv init
 uv venv
-uv add 'torch<2.7.0' numpy scipy matplotlib polars pandas
+uv add 'torch<2.7.0' numpy scipy matplotlib polars pandas kaggle
 . .venv/bin/activate
 ```
 
-### Training
+## data install
+```bash
+cd data
+kaggle competitions download -c hms-harmful-brain-activity-classification
+unzip hms-harmful-brain-activity-classification.zip
+cd ..
+```
+
+## Training
 ```bash:hoffman2
 # Model1:
 qsub submit.sh
