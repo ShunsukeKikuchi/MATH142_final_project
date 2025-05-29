@@ -1,4 +1,4 @@
-# MATH142_final_project
+# MATH156_final_project
 
 Assuming hoffman2 environment.
 
