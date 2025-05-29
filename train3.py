@@ -2,38 +2,27 @@ import os
 import torch
 import torch.nn as nn
 import torch.optim as optim
-import torch.nn.functional as F
-from torch.utils.data import Dataset, DataLoader
+from torch.utils.data import DataLoader
 
 import random
 import gc
-
 import numpy as np
-import pandas as pd
-import polars as pl
-import matplotlib.pyplot as plt
 
-from tqdm import tqdm
-from pathlib import Path
-from typing import Dict, List, Sequence, Tuple, Union
-
-from model3 import resnext
-from data import EEGDataset, create_dfs
+from src.model import resnext
+from src.data import EEGDataset, create_dfs
 
 class CFG:
     # basic
-    model_name = "eegnet_v2"
     seed = 42
     fold = 0
+    dataset_path = "./data/"
 
     # training setting
     n_epoch = 60*60
     device = "cuda" if torch.cuda.is_available() else "cpu"
     batch_size=32
     lr = 1e-3
-    autocast=True # used for training, not for validation
-
-    dataset_path = "."
+    autocast=True # used for training
 
 def set_seed(seed):
     torch.backends.cudnn.deterministic = False
@@ -67,7 +56,7 @@ def main():
         avg_val_loss = valid(model, valid_loader, kl_loss, epoch)
         if avg_val_loss < best_loss:
             best_loss = avg_val_loss
-            torch.save(model.state_dict(), "best_model3.pth")
+            torch.save(model.state_dict(), "weights/best_model3.pth")
             print(f">>> New best model saved (KL={best_loss:.4f}) <<<")
 
 def train(model, train_loader, optimizer, criterion, epoch):

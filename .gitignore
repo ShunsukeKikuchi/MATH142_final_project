@@ -5,9 +5,6 @@
 *.json
 *.jsonl
 *.jsonl.gz
-test_eegs/*
-test_spectrograms/*
-train_eegs/*
-train_spectrograms/*
+*.pdf
+__pycache__/*
 log/*
-example_figures/*
