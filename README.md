@@ -46,5 +46,5 @@ nohup python train_2D.py >log/train_2D.log &
 ```
 
 ### inference + submit to Kaggle kernel
-(1D) https://www.kaggle.com/code/shunsukekikuchi/1d-inference
+(1D) https://www.kaggle.com/code/shunsukekikuchi/1d-inference <br>
 (2D) https://www.kaggle.com/code/shunsukekikuchi/resnet-submit
