@@ -27,12 +27,14 @@ cd ..
 
 ## Training
 ```bash:hoffman2
-# Model1:
+# 1D - Model1:
 qsub submit.sh
-# Model2:
+# 1D - Model2:
 qsub submit2.sh
-# Model3:
+# 1D - Model3:
 qsub submit3.sh
+# 2D
+qsub submit_2D.sh
 ```
 or, 
 ```bash: usual env
@@ -40,7 +42,9 @@ or,
 nohup python train.py >log/train.log &
 nohup python train2.py >log/train2.log &
 nohup python train3.py >log/train3.log &
+nohup python train_2D.py >log/train_2D.log &
 ```
 
 ### inference + submit to Kaggle kernel
-use https://www.kaggle.com/code/shunsukekikuchi/1d-inference
+(1D) https://www.kaggle.com/code/shunsukekikuchi/1d-inference
+(2D) https://www.kaggle.com/code/shunsukekikuchi/resnet-submit
